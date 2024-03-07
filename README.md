@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+CARTSYS SOFTWARE
+Desafio prático
+Cargo Desenvolvedor Front-End – Pleno/Sênior
 
-## Getting Started
+Tecnologias:
+[x] Next.js
+[] Zustand
+[x] Typescript
+[x] Tailwind.css
+[x] Cypress.js
 
-First, run the development server:
+Desafio: Wizzard Creator
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Descrição:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O desafio consiste em criar uma interface para a criação dinâmica de wizards.
+Tela Inicial:
+[] Exibição de todas as wizards criadas e gravadas.
+[X] Menu com a opção de abrir o "Wizard Creator".
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Wizard Creator:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+O foco principal da aplicação, funciona como um criador de templates.
+Seleção de Orientação:
+[] O usuário define se o wizard será apresentado de maneira horizontal ou vertical.
 
-## Learn More
+Seleção de Componentes:
+[X] Lista de todos os componentes disponíveis, como formulários, cards, galeria de imagens, etc.
 
-To learn more about Next.js, take a look at the following resources:
+Criação do Wizard:
+[] Após selecionar a orientação, o usuário pode adicionar páginas ao wizard.
+[] Para cada página, o usuário pode escolher e adicionar componentes (menu de seleção, lista, dropdown, etc.).
+[] A visualização do design do wizard é atualizada conforme o usuário adiciona componentes.
+Visualização do Wizard Criado:
+[] O wizard criado é mostrado de forma indicativa na tela, destacando a orientação escolhida e os componentes adicionados.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Exemplo de Criação pelo Usuário:
+[] O usuário decide criar um Wizard vertical.
+[] Adiciona uma página chamada "Cadastro de Usuário".
+[] Na página "Cadastro de Usuário", insere três inputs para nome, e-mail e senha.
+[] Cria outra página chamada "Preferências".
+[] Na página "Preferências", adiciona dois inputs para configurações e um dropdown para seleção de tema.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Fluxo Geral:
 
-## Deploy on Vercel
+Na Tela Inicial:
+[] Todos os wizards criados são exibidos como opções para o usuário.
+[] O usuário pode navegar entre as páginas do wizard em um menu vertical ou horizontal, conforme a orientação escolhida.
+[] Preenchimento dos inputs e interação com os componentes são possíveis.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Objetivo Final:
+A aplicação visa proporcionar uma forma simples e dinâmica para que o usuário crie seus próprios wizards e telas.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Observações:
+[] A aplicação deve ser responsiva para oferecer uma experiência consistente em diferentes dispositivos.
+[] A integração de testes usando Cypress.js é encorajada para garantir a robustez da aplicação.
+[] Considerar a modularização do código para facilitar a manutenção e escalabilidade.
