@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/shared/theme-toogle";
+import NavigationMenu from "@/components/shared/navigator";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className, "w-screen h-screen")}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          <ModeToggle />
+          <NavigationMenu />
+          {/* <ModeToggle /> */}
           {children}
         </ThemeProvider>
       </body>
