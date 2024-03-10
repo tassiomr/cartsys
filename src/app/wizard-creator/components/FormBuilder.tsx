@@ -45,7 +45,6 @@ export default function FormBuilder({
     onSave(data, pageId);
   };
 
-  console.log(errors);
   return (
     <BottomSheet
       title={form.builder.title}

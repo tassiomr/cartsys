@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ButtonVariant } from "./button";
 
 export enum ComponentsType {
   input = "input",
@@ -6,9 +7,6 @@ export enum ComponentsType {
   select = "select",
   label = "label",
   themeToggle = "themeToggle",
-  // dropdown = "dropdown",
-  // themeToggle = "themeToggle",
-  // select = "select",
 }
 
 export const ComponentSchema = z.object({

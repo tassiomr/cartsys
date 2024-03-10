@@ -22,7 +22,7 @@ export default function Page() {
       {wizards.length ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {wizards.map((wizard, index) => (
-            <Card onClick={() => handleOpenWizard(wizard.id)}>
+            <Card key={index} onClick={() => handleOpenWizard(wizard.id)}>
               <CardHeader className="bg-primary rounded-tr-sm rounded-tl-sm"></CardHeader>
               <CardDescription className="p-4 flex flex-col gap-2">
                 <Label>Orientarion: {wizard.orientation}</Label>

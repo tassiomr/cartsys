@@ -10,7 +10,6 @@ import { useCallback, useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
 import NotFoundPage from "../not-found";
 import ComponentBuilder from "./ComponentBuilder";
-import { create } from "zustand";
 
 const styles = tv({
   base: "w-full h-content flex items-center pt-[6rem]",
@@ -81,9 +80,9 @@ export default function Viewer({ params }: { params: { id: string } }) {
         </h1>
 
         <div className="w-full flex flex-col gap-4 mt-8">
-          {currentPage?.components.map((component) => {
+          {currentPage?.components.map((component, index) => {
             return (
-              <ComponentBuilder component={component} key={component.id} />
+              <ComponentBuilder key={component.id} component={component} />
             );
           })}
         </div>

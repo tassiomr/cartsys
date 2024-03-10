@@ -50,7 +50,7 @@ export const buttonBuilder = {
       prop: "action",
       placeholder: "Escolha o estilo do seu botão",
       shortDescription: "Estilo do botão",
-      options: ["alert_action", "sheet_action"].map((value) => ({
+      options: ["alert", "sheet"].map((value) => ({
         value,
         label: value,
       })),

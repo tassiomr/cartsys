@@ -46,7 +46,11 @@ export function SelectComponent({
         <SelectGroup>
           {parseString(options).map((option) => {
             return (
-              <SelectItem className="capitalize" value={option.value}>
+              <SelectItem
+                key={option.value}
+                className="capitalize"
+                value={option.value}
+              >
                 {option.label}
               </SelectItem>
             );
