@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
 import NotFoundPage from "../not-found";
+import ComponentBuilder from "./ComponentBuilder";
+import { create } from "zustand";
 
 const styles = tv({
   base: "w-full h-content flex items-center pt-[6rem]",
@@ -44,6 +46,14 @@ export default function Viewer({ params }: { params: { id: string } }) {
     mountPage();
   }, [mountPage]);
 
+  const handleBackward = () => {
+    setStep((state) => state - 1);
+  };
+
+  const handleForward = () => {
+    setStep((state) => state + 1);
+  };
+
   if (!wizard) {
     return <NotFoundPage />;
   }
@@ -62,20 +72,22 @@ export default function Viewer({ params }: { params: { id: string } }) {
         orientation={wizard.orientation}
         current={currentStep}
         totalSteps={wizard.pages.length}
+        onBackward={handleBackward}
+        onForward={handleForward}
       />
       <div className="lg:w-1/2 md:w-1/2 sm:w-full max-[650px]:w-full max-[650px]:p-8 sm:p-8">
         <h1 className="lg:text-3xl md:text-2xl sm:text-xl font-bold mb-8 mt-6">
           {currentPage?.title}
         </h1>
 
-        <div className="w-full flex flex-col gap-4 mt-8"></div>
+        <div className="w-full flex flex-col gap-4 mt-8">
+          {currentPage?.components.map((component) => {
+            return (
+              <ComponentBuilder component={component} key={component.id} />
+            );
+          })}
+        </div>
         <footer className="flex justify-center items-center py-4 sm:py-8 md:py-0 md:px-4 w-full gap-4 mt-10">
-          {currentStep !== wizard.pages.length && (
-            <Button onClick={() => setStep((step) => step + 1)}>Next</Button>
-          )}
-          {currentStep > 1 && (
-            <Button onClick={() => setStep((step) => step - 1)}>Back</Button>
-          )}
           {currentStep === wizard.pages.length && (
             <Button onClick={() => console.log(store.getForm())}>Finish</Button>
           )}

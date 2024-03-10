@@ -28,6 +28,9 @@ export default function HomePage() {
     setOrientation,
   } = createWizard();
 
+  const navigation = useRouter();
+  const appStore = useAppStore();
+
   const [formStatus, setFormStatus] = useState<{
     isOpen: boolean;
     componentType: ComponentsType;
@@ -40,11 +43,14 @@ export default function HomePage() {
     }
   }, [id]);
 
-  const navigation = useRouter();
-  const appStore = useAppStore();
-
   const onSave = () => {
-    appStore.createWizard({ id, pages, orientation });
+    const { id, pages, orientation, createdAt } = createWizard.getState();
+    appStore.createWizard({
+      id,
+      pages,
+      orientation,
+      createdAt,
+    });
 
     navigation.replace(`/viewer/${id}`);
     reset();
@@ -82,6 +88,8 @@ export default function HomePage() {
   ) => {
     setFormStatus({ componentType, pageId, isOpen: true });
   };
+
+  console.log(pages);
 
   return (
     <div className="w-full flex h-auto pt-[4rem]">
