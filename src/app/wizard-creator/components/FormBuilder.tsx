@@ -17,11 +17,13 @@ type FormBuilderType = {
     pageId: string;
   };
   onSave: (param: Component, pageId: string) => void;
+  onOpenChange: () => void;
 };
 
 export default function FormBuilder({
   formStatus: { componentType, isOpen, pageId },
   onSave,
+  onOpenChange,
 }: FormBuilderType) {
   const form = Fileds[componentType];
   type formType = z.infer<typeof form.zod>;
@@ -31,22 +33,24 @@ export default function FormBuilder({
     setValue,
     control,
     formState: { errors },
+    reset,
   } = useForm<formType>({
     resolver: zodResolver(form?.zod),
     defaultValues: {
       id: cuid(),
-      type: componentType,
     },
   });
 
-  const handleOnSubmit = (data: any) => {
+  const handleOnSubmit = async (data: any) => {
     onSave(data, pageId);
   };
 
+  console.log(errors);
   return (
     <BottomSheet
       title={form.builder.title}
       open={isOpen}
+      onOpenChange={onOpenChange}
       footer={
         <Button type="submit" onClick={handleSubmit(handleOnSubmit)}>
           Adicionar
@@ -59,14 +63,13 @@ export default function FormBuilder({
             return (
               <div>
                 <Label className="capitalize" htmlFor={`props.${field.prop}`}>
-                  {field.prop}:
+                  {field.shortDescription}:
                 </Label>
                 <Input
                   placeholder={field.placeholder}
                   name={`props.${field.prop}`}
                   id={`props.${field.prop}`}
                   onChange={(event) => {
-                    //@ts-expect-error <Needed cause the form is dynamic and won't get a concrete name of prop>
                     setValue(`props.${field.prop}`, event?.target.value);
                   }}
                 />
@@ -79,15 +82,13 @@ export default function FormBuilder({
             return (
               <div>
                 <Label className="capitalize" htmlFor={`props.${field.prop}`}>
-                  {field.prop}:
+                  {field.shortDescription}:
                 </Label>
                 <Controller
-                  //@ts-expect-error <Needed cause the form is dynamic and won't get a concrete name of prop>
                   name={`props.${field.prop}`}
                   control={control}
                   render={({ field: renderField }) => (
                     <SelectComponent
-                      //@ts-expect-error <Needed cause the form is dynamic and won't get a concrete name of prop>
                       value={renderField.value}
                       onChange={renderField.onChange}
                       options={field.options!}

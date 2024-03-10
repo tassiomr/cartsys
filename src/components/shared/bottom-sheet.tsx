@@ -16,15 +16,17 @@ export default function BottomSheet({
   footer,
   title,
   description,
+  onOpenChange,
 }: {
   open: boolean;
   children: React.ReactNode;
   footer: React.ReactNode;
   title?: string;
   description?: string;
+  onOpenChange: () => void;
 }) {
   return (
-    <Sheet open={open} key={"bottom"}>
+    <Sheet open={open} onOpenChange={onOpenChange} key={"bottom"}>
       <SheetContent side="bottom">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>

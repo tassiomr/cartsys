@@ -11,7 +11,10 @@ export enum InputTypes {
 
 export const InputSchema = z.object({
   id: z.string().cuid(),
-  type: z.nativeEnum(ComponentsType).refine((value) => ComponentsType[value]),
+  type: z
+    .nativeEnum(ComponentsType)
+    .default(ComponentsType.input)
+    .refine((value) => ComponentsType[value]),
   props: z.object({
     label: z.string().min(5, "A propriedade label é obrigátoria"),
     type: z.nativeEnum(InputTypes).refine((value) => {
@@ -28,6 +31,7 @@ export type Input = z.infer<typeof InputSchema>;
 
 export const inputBuilder = {
   title: "Criar input",
+  type: "input",
   props: [
     {
       type: "input",

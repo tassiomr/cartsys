@@ -10,7 +10,9 @@ export default function NavigationMenu() {
 
   return (
     <nav className="fixed z-1 bg-primary-foreground flex justify-between px-12 items-center w-screen h-16">
-      <p>CartSys Challanger</p>
+      <Link href={"/"}>
+        <p>CartSys Challanger</p>
+      </Link>
       <div className="flex gap-2">
         {pathname !== "/wizard-creator" && (
           <Link href="/wizard-creator">

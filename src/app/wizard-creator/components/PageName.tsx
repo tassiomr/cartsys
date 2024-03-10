@@ -23,7 +23,7 @@ export default function PageName({
               value={page.title}
               onChange={(e) => setPageName({ ...page, title: e.target.value })}
             />
-            <Button onClick={() => setIsEdit(false)}>Confirmar</Button>
+            <Button onClick={() => setIsEdit(false)}>Salvar nome</Button>
           </div>
         ) : (
           <div

@@ -21,11 +21,15 @@ export default function PageBuilder({
   }));
 
   return (
-    <Card className="md:w-1/2 mt-8 sm:w-full h-auto">
+    <Card className="md:w-2/3  mt-8 sm:w-full max-[650px]:w-full h-auto">
       <CardHeader>
         <CardTitle>
           <PageName page={page} setPageName={setPageName} />
-          <ContextMenu title={"Adicionar components"} components={components} />
+          <ContextMenu
+            className="p-4"
+            title={"Adicionar components"}
+            components={components}
+          />
         </CardTitle>
       </CardHeader>
       <CardContent>

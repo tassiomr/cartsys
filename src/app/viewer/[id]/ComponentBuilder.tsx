@@ -1,4 +1,4 @@
-import { components } from "@/components/ui";
+import { components } from "@/components";
 import { Component } from "@/types/components";
 
 type ComponentBuilderType = {

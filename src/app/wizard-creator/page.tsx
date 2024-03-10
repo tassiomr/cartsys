@@ -2,7 +2,7 @@
 import { useAppStore } from "@/store/useAppStore";
 import { createWizard } from "@/store/useCreateWizard";
 import { Component, ComponentsType } from "@/types/components";
-import { Orientation, Page, Wizard } from "@/types/wizard";
+import { Orientation, Page } from "@/types/wizard";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
@@ -33,9 +33,9 @@ export default function HomePage() {
 
   const [formStatus, setFormStatus] = useState<{
     isOpen: boolean;
-    componentType: ComponentsType;
+    componentType?: ComponentsType;
     pageId: string;
-  }>({ isOpen: false, pageId: "", componentType: ComponentsType.input });
+  }>({ isOpen: false, pageId: "" });
 
   useEffect(() => {
     if (!id) {
@@ -79,7 +79,11 @@ export default function HomePage() {
 
   const handleAddComponents = (component: Component, pageId: string) => {
     addComponent(component, pageId);
-    setFormStatus((state) => ({ ...state, pageId: "", isOpen: false }));
+    setFormStatus((state) => ({
+      ...state,
+      pageId: "",
+      isOpen: false,
+    }));
   };
 
   const openAddComponentModal = (
@@ -89,14 +93,15 @@ export default function HomePage() {
     setFormStatus({ componentType, pageId, isOpen: true });
   };
 
-  console.log(pages);
+  const onCloseModal = () => {
+    setFormStatus({ componentType: undefined, pageId: "", isOpen: false });
+  };
 
   return (
     <div className="w-full flex h-auto pt-[4rem]">
       <div className={mainStyle()}>
         <div className="flex gap-8">
           <Title orientation={orientation} setOrientation={setOrientation} />
-
           <Actions
             isVisible={orientation !== Orientation.none}
             addPage={addPage}
@@ -116,7 +121,11 @@ export default function HomePage() {
         ))}
 
         {formStatus.componentType && (
-          <FormBuilder formStatus={formStatus} onSave={handleAddComponents} />
+          <FormBuilder
+            formStatus={{ ...formStatus }}
+            onOpenChange={onCloseModal}
+            onSave={handleAddComponents}
+          />
         )}
       </div>
     </div>

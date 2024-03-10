@@ -1,12 +1,13 @@
-import { components } from "@/components/ui";
+import { components } from "@/components";
 import { Component } from "@/types/components";
 
 type ComponentBuilderType = {
-	component: Component;
+  component: Component;
 };
 
 export default function ComponentBuilder({ component }: ComponentBuilderType) {
-	const Component = components[component.type];
+  const Component = components[component.type];
 
-	return <Component {...component.props} />;
+  console.log(Component);
+  return <Component {...component.props} />;
 }
