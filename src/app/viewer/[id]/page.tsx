@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { useViewerStore } from "@/store/useViewerStore";
 import type { Page } from "@/types/wizard";
 import { Orientation } from "@/types/wizard";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
 import NotFoundPage from "../not-found";
@@ -26,6 +26,7 @@ const styles = tv({
 export default function Viewer({ params }: { params: { id: string } }) {
   const [currentStep, setStep] = useState(1);
   const [currentPage, setPage] = useState<Page | null>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const orientation = useSearchParams().get("orientation") as Orientation;
   const pages = JSON.parse(useSearchParams().get("pages") || "{}") as Page[];
@@ -61,13 +62,27 @@ export default function Viewer({ params }: { params: { id: string } }) {
     setStep((state) => state + 1);
   };
 
+  const handleShowResults = () => {
+    setIsOpen((state) => !state);
+  };
+
+  const handleFinishStap = () => {
+    setIsOpen((state) => !state);
+
+    navigation.replace("/");
+  };
+
   if (!wizard) {
     return <NotFoundPage />;
   }
 
   return (
     <div className={styles({ orientation: wizard?.orientation })}>
-      <DrawerComponent />
+      <DrawerComponent
+        pages={wizard.pages}
+        open={isOpen}
+        dispose={handleFinishStap}
+      />
       {isPreviewViewer && (
         <Button
           className="fixed top-[5rem] left-6"
@@ -97,7 +112,7 @@ export default function Viewer({ params }: { params: { id: string } }) {
         </div>
         <footer className="flex justify-center items-center py-4 sm:py-8 md:py-0 md:px-4 w-full gap-4 mt-10">
           {currentStep === wizard.pages.length && (
-            <Button onClick={() => console.log(store.getForm())}>Finish</Button>
+            <Button onClick={handleShowResults}>Finish</Button>
           )}
         </footer>
       </div>

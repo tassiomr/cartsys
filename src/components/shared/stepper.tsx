@@ -60,7 +60,15 @@ const wrapperStyle = tv({
 });
 
 const iconsStyle = "h-8 w-8";
-const buttonStyle = "w-12 h-12 p-0";
+const buttonStyle = tv({
+  base: "p-0",
+  variants: {
+    visible: {
+      no: "opacity-0 cursor-default",
+      yes: "",
+    },
+  },
+});
 
 type StepperType = {
   current: number;
@@ -81,15 +89,22 @@ export default function Stepper({
 
   return (
     <div className={mainStyle({ orientation })}>
-      {current > 1 ? (
-        <Button variant={"ghost"} className={buttonStyle} onClick={onBackward}>
-          {orientation === Orientation.horizontal ? (
-            <ChevronLeft className={iconsStyle} />
-          ) : (
-            <ChevronUp className={iconsStyle} />
-          )}
-        </Button>
-      ) : null}
+      <Button
+        variant={"ghost"}
+        size={"icon"}
+        className={buttonStyle({ visible: current > 1 ? "yes" : "no" })}
+        onClick={() => {
+          if (current > 1) {
+            onBackward();
+          }
+        }}
+      >
+        {orientation === Orientation.horizontal ? (
+          <ChevronLeft className={iconsStyle} />
+        ) : (
+          <ChevronUp className={iconsStyle} />
+        )}
+      </Button>
 
       {steps.map((step) => {
         const status = step <= current ? "isComplete" : "isCurrent";
@@ -112,15 +127,19 @@ export default function Stepper({
           </React.Fragment>
         );
       })}
-      {current < totalSteps && (
-        <Button variant={"ghost"} className={buttonStyle} onClick={onForward}>
-          {orientation === Orientation.horizontal ? (
-            <ChevronRight className={iconsStyle} />
-          ) : (
-            <ChevronDown className={iconsStyle} />
-          )}
-        </Button>
-      )}
+      <Button
+        variant={"ghost"}
+        className={buttonStyle({
+          visible: current < totalSteps ? "yes" : "no",
+        })}
+        onClick={onForward}
+      >
+        {orientation === Orientation.horizontal ? (
+          <ChevronRight className={iconsStyle} />
+        ) : (
+          <ChevronDown className={iconsStyle} />
+        )}
+      </Button>
     </div>
   );
 }

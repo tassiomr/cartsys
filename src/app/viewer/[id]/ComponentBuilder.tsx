@@ -1,4 +1,4 @@
-// ts-nocheck
+/* ts-nocheck */
 "use client";
 import { components } from "@/components";
 import { useViewerStore } from "@/store/useViewerStore";
@@ -17,8 +17,14 @@ export default function ComponentBuilder({ component }: ComponentBuilderType) {
       <Component
         {...component.props}
         onChange={(e) => {
-          useViewerStore.setState({ [component.id]: e.target.value });
+          useViewerStore.setState({
+            [component.id]: {
+              label: component.props?.label,
+              value: e.target.value,
+            },
+          });
         }}
+        value={useViewerStore?.getState()[component.id]?.value}
       />
     );
   }
@@ -26,7 +32,7 @@ export default function ComponentBuilder({ component }: ComponentBuilderType) {
   if (component.type === ComponentsType.button) {
     <Component
       {...component.props}
-      onClick={useViewerStore.getState()[component.props.actions]}
+      onClick={useViewerStore?.getState()[component.props.actions]}
     />;
   }
 

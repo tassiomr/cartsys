@@ -43,10 +43,6 @@ export default function HomePage() {
     }
   }, [id]);
 
-  useEffect(() => {
-    // return reset();
-  }, []);
-
   const onSave = () => {
     const { id, pages, orientation, createdAt } = createWizard.getState();
     appStore.createWizard({
@@ -70,6 +66,7 @@ export default function HomePage() {
 
   const cancelAction = () => {
     navigation.replace("/");
+    reset();
   };
 
   const handleUpdatePage = (page: Page) => {
