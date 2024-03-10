@@ -5,11 +5,12 @@ import { useAppStore } from "@/store/useAppStore";
 import { useViewerStore } from "@/store/useViewerStore";
 import type { Page } from "@/types/wizard";
 import { Orientation } from "@/types/wizard";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
 import NotFoundPage from "../not-found";
 import ComponentBuilder from "./ComponentBuilder";
+import DrawerComponent from "@/components/shared/drawer";
 
 const styles = tv({
   base: "w-full h-content flex items-center pt-[6rem]",
@@ -26,13 +27,20 @@ export default function Viewer({ params }: { params: { id: string } }) {
   const [currentStep, setStep] = useState(1);
   const [currentPage, setPage] = useState<Page | null>();
 
-  const isPreviewViewer = false;
+  const orientation = useSearchParams().get("orientation") as Orientation;
+  const pages = JSON.parse(useSearchParams().get("pages") || "{}") as Page[];
+  const isPreviewViewer = Boolean(useSearchParams().get("isPreviewViewer"));
+
   const navigation = useRouter();
   const store = useViewerStore();
 
-  const wizard = useAppStore((state) =>
+  const appWizard = useAppStore((state) =>
     state.wizards.find((wizard) => wizard.id === params.id)
   );
+
+  const wizard = isPreviewViewer
+    ? { pages, orientation, isPreviewViewer }
+    : appWizard;
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const mountPage = useCallback(() => {
@@ -59,6 +67,7 @@ export default function Viewer({ params }: { params: { id: string } }) {
 
   return (
     <div className={styles({ orientation: wizard?.orientation })}>
+      <DrawerComponent />
       {isPreviewViewer && (
         <Button
           className="fixed top-[5rem] left-6"
@@ -80,7 +89,7 @@ export default function Viewer({ params }: { params: { id: string } }) {
         </h1>
 
         <div className="w-full flex flex-col gap-4 mt-8">
-          {currentPage?.components.map((component, index) => {
+          {currentPage?.components.map((component) => {
             return (
               <ComponentBuilder key={component.id} component={component} />
             );

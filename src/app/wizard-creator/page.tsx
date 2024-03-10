@@ -43,6 +43,10 @@ export default function HomePage() {
     }
   }, [id]);
 
+  useEffect(() => {
+    // return reset();
+  }, []);
+
   const onSave = () => {
     const { id, pages, orientation, createdAt } = createWizard.getState();
     appStore.createWizard({
@@ -53,16 +57,19 @@ export default function HomePage() {
     });
 
     navigation.replace(`/viewer/${id}`);
-    reset();
   };
 
   const handleGoToPreviewPage = () => {
-    navigation.push("/viewer");
+    const { id, pages, orientation } = createWizard.getState();
+    navigation.push(
+      `/viewer/${id}?orientation=${orientation}&pages=${JSON.stringify(
+        pages
+      )}&isPreviewViewer=true`
+    );
   };
 
   const cancelAction = () => {
     navigation.replace("/");
-    reset();
   };
 
   const handleUpdatePage = (page: Page) => {
@@ -122,7 +129,7 @@ export default function HomePage() {
 
         {formStatus.componentType && (
           <FormBuilder
-            formStatus={{ ...formStatus }}
+            formStatus={formStatus}
             onOpenChange={onCloseModal}
             onSave={handleAddComponents}
           />

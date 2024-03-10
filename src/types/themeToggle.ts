@@ -23,7 +23,7 @@ export const toggleThemeBuilder = {
       prop: "action",
       placeholder: "Digite para adicionar texto ao label",
       shortDescription: "Actions",
-      options: ["alert", "sheet"].map((e) => ({ label: e, value: e })),
+      options: ["sheet"].map((e) => ({ label: e, value: e })),
     },
   ],
 };

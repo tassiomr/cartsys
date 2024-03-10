@@ -8,6 +8,5 @@ type ComponentBuilderType = {
 export default function ComponentBuilder({ component }: ComponentBuilderType) {
   const Component = components[component.type];
 
-  console.log(Component);
   return <Component {...component.props} />;
 }

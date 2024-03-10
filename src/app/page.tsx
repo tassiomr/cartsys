@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useAppStore } from "@/store/useAppStore";
-import type { Wizard } from "@/types/wizard";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -14,8 +13,6 @@ export default function Page() {
   const handleOpenWizard = (id: string) => {
     navigation.push(`/viewer/${id}`);
   };
-
-  console.log(wizards);
 
   return (
     <div className="w-full h-full pt-[6rem] px-12 pb-8">

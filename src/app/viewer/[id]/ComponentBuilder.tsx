@@ -12,9 +12,6 @@ type ComponentBuilderType = {
 export default function ComponentBuilder({ component }: ComponentBuilderType) {
   const Component = components[component.type];
 
-  const uVS = useViewerStore((store) => store);
-
-  console.log(uVS);
   if (component.type === ComponentsType.input) {
     return (
       <Component
@@ -26,7 +23,6 @@ export default function ComponentBuilder({ component }: ComponentBuilderType) {
     );
   }
 
-  console.log(component.props);
   if (component.type === ComponentsType.button) {
     <Component
       {...component.props}
