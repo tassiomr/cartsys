@@ -72,25 +72,27 @@ export default function ViewerPage({ params }: { params: { id: string } }) {
   };
 
   const handleShowResults = () => {
-    toast({
-      title: constants.viewer.toast.title,
-      description: constants.viewer.toast.description,
-      action: (
-        <Button
-          onClick={() => {
-            navigation.replace("/");
-            createWizard.setState({
-              id: "",
-              pages: [],
-              orientation: Orientation.none,
-            });
-            dismiss();
-          }}
-        >
-          {constants.viewer.toast.button}
-        </Button>
-      ),
-    });
+    if (!isPreviewViewer) {
+      toast({
+        title: constants.viewer.toast.title,
+        description: constants.viewer.toast.description,
+        action: (
+          <Button
+            onClick={() => {
+              navigation.replace("/");
+              createWizard.setState({
+                id: "",
+                pages: [],
+                orientation: Orientation.none,
+              });
+              dismiss();
+            }}
+          >
+            {constants.viewer.toast.button}
+          </Button>
+        ),
+      });
+    }
   };
 
   if (!wizard) {
