@@ -1,5 +1,5 @@
 import ButtonGroup from "@/components/shared/button-group";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
 import { useCallback, useEffect, useState } from "react";
 
 type ActionsProp = {
@@ -33,16 +33,19 @@ export default function Actions({
       cancel: cancelAction,
       preview: goToPreview,
     };
+    const buttons = [];
 
-    return constants.wizardCreator.actions.buttons.map((button) => {
-      if (isPageEmpty && button.label === "preview") {
-        return null;
+    for (const button of constants.wizardCreator.actions.buttons) {
+      if (button.action === "preview" && isPageEmpty) {
+      } else {
+        buttons.push({
+          label: button.label,
+          click: actionFactory[button.action as keyof typeof actionFactory],
+        });
       }
-      return {
-        label: button.label,
-        click: actionFactory[button.action as keyof typeof actionFactory],
-      };
-    });
+    }
+
+    return buttons;
   }, [isPageEmpty]);
 
   useEffect(() => {

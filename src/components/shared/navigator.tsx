@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
 import { ModeToggle } from "./theme-toogle";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
 
 export default function NavigationMenu() {
   const pathname = usePathname();

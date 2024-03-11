@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
 import { Page } from "@/types/wizard";
 import { useState } from "react";
 
@@ -24,7 +24,9 @@ export default function PageName({
               value={page.title}
               onChange={(e) => setPageName({ ...page, title: e.target.value })}
             />
-            <Button onClick={() => setIsEdit(false)}>{constants.wizardCreator.pageName.button}</Button>
+            <Button onClick={() => setIsEdit(false)}>
+              {constants.wizardCreator.pageName.button}
+            </Button>
           </div>
         ) : (
           <div

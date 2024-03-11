@@ -18,7 +18,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
 import NotFoundPage from "../not-found";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
+import { createWizard } from "@/store/useCreateWizard";
 
 const styles = tv({
   base: "w-full h-content flex items-center pt-[6rem]",
@@ -78,10 +79,15 @@ export default function ViewerPage({ params }: { params: { id: string } }) {
         <Button
           onClick={() => {
             navigation.replace("/");
+            createWizard.setState({
+              id: "",
+              pages: [],
+              orientation: Orientation.none,
+            });
             dismiss();
           }}
         >
-          Go Home
+          {constants.viewer.toast.button}
         </Button>
       ),
     });

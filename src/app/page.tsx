@@ -2,13 +2,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
+import { compareDate } from "@/lib/compare";
 import { useAppStore } from "@/store/useAppStore";
+import { Wizard } from "@/types/wizard";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const wizards = useAppStore((store) => store.wizards);
+  const wizards = useAppStore((store) =>
+    store.wizards.sort((a: Wizard, b: Wizard) =>
+      compareDate(b.createdAt, a.createdAt)
+    )
+  );
   const navigation = useRouter();
 
   const handleOpenWizard = (id: string) => {
@@ -24,13 +30,10 @@ export default function Page() {
               data-testId={`wizard-${index}`}
               key={wizard.id}
               onClick={() => handleOpenWizard(wizard.id)}
+              className="rounded-sm"
             >
               <CardHeader className="bg-primary rounded-tr-sm rounded-tl-sm" />
               <CardDescription className="p-4 flex flex-col gap-2">
-                <Label>{constants.wizardHome.title}</Label>
-                <Label>{constants.wizardHome.description}</Label>
-                <Label>{constants.wizardHome.pageNamePlaceholder}</Label>
-                <Label>{constants.wizardHome.buttons.saveButton}</Label>
                 <Label>
                   {constants.wizardHome.card.orientationLabel}
                   {wizard.orientation}

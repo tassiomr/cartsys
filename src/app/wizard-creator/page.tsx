@@ -12,6 +12,7 @@ import Actions from "./components/Actions";
 import FormBuilder from "./components/FormBuilder";
 import PageBuilder from "./components/PageBuilder";
 import Title from "./components/Title";
+import constants from "@/configs/constants";
 
 const mainStyle = tv({
   base: "w-full flex flex-col items-center p-6",
@@ -55,8 +56,8 @@ export default function WizardCreatorPage() {
     });
 
     toast({
-      title: "Wizard finalizado.",
-      description: "Seu wizard foi criado com sucesso!",
+      title: constants.wizardCreator.toast.title,
+      description: constants.wizardCreator.toast.title,
       duration: 3500,
       variant: "default",
     });
@@ -126,7 +127,10 @@ export default function WizardCreatorPage() {
 
         {formStatus.componentType && (
           <FormBuilder
-            formStatus={formStatus}
+            formStatus={{
+              ...formStatus,
+              componentType: formStatus.componentType,
+            }}
             onOpenChange={onCloseModal}
             onSave={handleAddComponents}
           />

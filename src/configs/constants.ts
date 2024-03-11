@@ -28,6 +28,10 @@ const constants = {
         { label: "Preview", action: "preview" },
       ],
     },
+    toast: {
+      title: "Wizard finalizado.",
+      description: "Seu wizard foi criado com sucesso!",
+    },
   },
   viewer: {
     buttons: {
@@ -37,6 +41,7 @@ const constants = {
     toast: {
       title: "Resultados coletados",
       description: "Seus dados foram coletados e estão acessiveis no ViewStore",
+      button: "Go Home",
     },
   },
   wizardHome: {
@@ -53,9 +58,9 @@ const constants = {
       createdAtLabel: "Criado em: ",
     },
     emptyPage: {
-      noWizardMessage: "Parece que você ainda não criou nenhum wizard!",
+      noWizardMessage: "Não temos nenhum wizard por aqui!",
       startCreatingMessage:
-        "Que tal começar a criar seu primeiro wizard agora?",
+        "Que tal começar a criar seu primeiro projeto agora?",
     },
   },
 };

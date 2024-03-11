@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ComponentsType } from "@/types/components";
 import { Page } from "@/types/wizard";
 import PageName from "./PageName";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
 
 export default function PageBuilder({
   page,

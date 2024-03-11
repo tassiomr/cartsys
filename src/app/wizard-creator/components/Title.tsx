@@ -1,55 +1,54 @@
 import { Button } from "@/components/ui/button";
 import {
-	Card,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import constants from "@/config/constants";
+import constants from "@/configs/constants";
 import { Orientation } from "@/types/wizard";
 
 type TitleProps = {
-	orientation: Orientation;
-	setOrientation: (value: Orientation) => void;
+  orientation: Orientation;
+  setOrientation: (value: Orientation) => void;
 };
 
 export default function Title({ orientation, setOrientation }: TitleProps) {
-	const orientationButtons = [Orientation.horizontal, Orientation.vertical];
+  const orientationButtons = [Orientation.horizontal, Orientation.vertical];
 
-	if (orientation === Orientation.none) {
-		return (
-			<Card>
-				<CardHeader>
-					<CardTitle>{constants.wizardCreator.emptyOrientationTitle}</CardTitle>
-					<CardDescription>
-					{constants.wizardCreator.emptyOrientationDescription}
-					
-					</CardDescription>
-				</CardHeader>
+  if (orientation === Orientation.none) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>{constants.wizardCreator.emptyOrientationTitle}</CardTitle>
+          <CardDescription>
+            {constants.wizardCreator.emptyOrientationDescription}
+          </CardDescription>
+        </CardHeader>
 
-				<CardFooter className="flex gap-2">
-					{orientationButtons.map((value, index) => {
-						return (
-							<Button
-								key={value}
-								className="min-w-[100px] lg:min-w-[120px]"
-								onClick={() => setOrientation(value)}
-							>
-								{value}
-							</Button>
-						);
-					})}
-				</CardFooter>
-			</Card>
-		);
-	}
+        <CardFooter className="flex gap-2">
+          {orientationButtons.map((value, index) => {
+            return (
+              <Button
+                key={value}
+                className="min-w-[100px] lg:min-w-[120px]"
+                onClick={() => setOrientation(value)}
+              >
+                {value}
+              </Button>
+            );
+          })}
+        </CardFooter>
+      </Card>
+    );
+  }
 
-	return (
-		<>
-			<h1 className="text-xl  font-light uppercase flex items-center justify-center gap-2">
-				Layout: {orientation}
-			</h1>
-		</>
-	);
+  return (
+    <>
+      <h1 className="text-xl  font-light uppercase flex items-center justify-center gap-2">
+        Layout: {orientation}
+      </h1>
+    </>
+  );
 }
