@@ -1,7 +1,5 @@
 # CARTSYS CHALLENGER
 
-## Menu de Navegação
-
 - [Propósito](#propósito)
 - [Objetivo](#objetivo)
 - [Minhas Considerações sobre o Projeto](#minhas-considerações-sobre-o-projeto)
