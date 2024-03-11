@@ -3,8 +3,8 @@ import ContextMenu from "@/components/shared/navbar-group";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ComponentsType } from "@/types/components";
 import { Page } from "@/types/wizard";
-import ComponentBuilder from "./ComponentBuilder";
 import PageName from "./PageName";
+import ComponentBuilder from "@/components/shared/component-builder";
 
 export default function PageBuilder({
   page,

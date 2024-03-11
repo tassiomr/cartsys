@@ -19,12 +19,15 @@ export default function Page() {
       {wizards.length ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {wizards.map((wizard, index) => (
-            <Card key={index} onClick={() => handleOpenWizard(wizard.id)}>
-              <CardHeader className="bg-primary rounded-tr-sm rounded-tl-sm"></CardHeader>
+            <Card
+              data-testId={`wizard-${index}`}
+              key={wizard.id}
+              onClick={() => handleOpenWizard(wizard.id)}
+            >
+              <CardHeader className="bg-primary rounded-tr-sm rounded-tl-sm" />
               <CardDescription className="p-4 flex flex-col gap-2">
                 <Label>Orientarion: {wizard.orientation}</Label>
                 <Label>Pages: {wizard.pages.length}</Label>
-                <Label>All Component List: Soon</Label>
                 {wizard.createdAt && (
                   <Label>
                     Created at:{" "}

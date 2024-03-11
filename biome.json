@@ -11,8 +11,7 @@
 				"useBlockStatements": "error",
 				"useShorthandArrayType": "error",
 				"noShoutyConstants": "warn",
-				"noVar": "error",
-				"useExhaustiveDependencies": "off"
+				"noVar": "error"
 			}
 		}
 	},

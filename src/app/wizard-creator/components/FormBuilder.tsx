@@ -25,8 +25,8 @@ export default function FormBuilder({
   onSave,
   onOpenChange,
 }: FormBuilderType) {
-  const form = Fileds[componentType];
-  type formType = z.infer<typeof form.zod>;
+  const configs = Fileds[componentType];
+  type configType = z.infer<typeof configs.zod>;
 
   const {
     handleSubmit,
@@ -34,8 +34,8 @@ export default function FormBuilder({
     control,
     formState: { errors },
     reset,
-  } = useForm<formType>({
-    resolver: zodResolver(form?.zod),
+  } = useForm<configType>({
+    resolver: zodResolver(configs.zod),
     defaultValues: {
       id: cuid(),
     },
@@ -43,11 +43,12 @@ export default function FormBuilder({
 
   const handleOnSubmit = async (data: any) => {
     onSave(data, pageId);
+    reset();
   };
 
   return (
     <BottomSheet
-      title={form.builder.title}
+      title={configs.builder.title}
       open={isOpen}
       onOpenChange={onOpenChange}
       footer={
@@ -57,7 +58,7 @@ export default function FormBuilder({
       }
     >
       <form className="flex flex-col gap-4">
-        {form.builder.props.map((field) => {
+        {configs.builder.props.map((field) => {
           if (field.type === "input") {
             return (
               <div>

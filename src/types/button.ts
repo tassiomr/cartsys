@@ -12,7 +12,7 @@ export enum ButtonVariant {
 }
 
 export const ButtonSchema = z.object({
-  id: z.string().cuid(),
+  id: z.string().cuid().optional(),
   type: z.nativeEnum(ComponentsType).default(ComponentsType.button),
   props: z.object({
     children: z.string().min(5, "A propriedade label é obrigátoria"),
@@ -50,7 +50,7 @@ export const buttonBuilder = {
       prop: "action",
       placeholder: "Escolha o estilo do seu botão",
       shortDescription: "Estilo do botão",
-      options: ["alert", "sheet"].map((value) => ({
+      options: ["alert"].map((value) => ({
         value,
         label: value,
       })),

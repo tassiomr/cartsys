@@ -1,10 +1,9 @@
 import { ComponentsType } from "@/types/components";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Title } from "./ui/text";
-import { Label } from "./ui/label";
-import { SelectComponent } from "./shared/select";
-import { ModeToggle } from "./shared/theme-toogle";
+import { SelectComponent } from "../shared/select";
+import { ModeToggle } from "../shared/theme-toogle";
+import { Button } from "./button";
+import { Input } from "./input";
+import { Label } from "./label";
 
 export const components = {
   [ComponentsType.button]: Button,

@@ -7,12 +7,12 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { Button } from "../ui/button";
+import { useViewerStore } from "@/store/useViewerStore";
 import { Page } from "@/types/wizard";
 import React from "react";
-import { Title } from "../ui/text";
-import { useViewerStore } from "@/store/useViewerStore";
+import { Button } from "../ui/button";
 import { Label } from "../ui/label";
+import { Title } from "../ui/text";
 
 export default function DrawerComponent({
   pages,
@@ -32,18 +32,18 @@ export default function DrawerComponent({
             return (
               <div key={page.id}>
                 <DrawerTitle className="text-2xl">{page.title}</DrawerTitle>
-                {page.components.map((component) => {
-                  return (
-                    <DrawerDescription>
-                      {getState && (
-                        <Title text={getState()[component.id]?.label} />
-                      )}
-                      {getState && (
-                        <Label>{getState()[component.id]?.value}</Label>
-                      )}
-                    </DrawerDescription>
-                  );
-                })}
+                {page.components
+                  .filter((comp) => comp.type !== "button")
+                  .map((component) => {
+                    return (
+                      <DrawerDescription key={component.id}>
+                        <p className="text-xl text-foreground">
+                          {component.props.label || component.props.placeholder}
+                          :
+                        </p>
+                      </DrawerDescription>
+                    );
+                  })}
               </div>
             );
           })}

@@ -1,15 +1,15 @@
 import { cn } from "@/lib/utils";
 import { Orientation } from "@/types/wizard";
-import React from "react";
-import { tv } from "tailwind-variants";
-import { Label } from "../ui/label";
 import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronUp,
 } from "lucide-react";
+import React from "react";
+import { tv } from "tailwind-variants";
 import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 
 const mainStyle = tv({
   base: "flex flex-row w-full justify-center items-center gap-2",
@@ -27,8 +27,8 @@ const stepStyle = tv({
       justify-center items-center`,
   variants: {
     status: {
-      isComplete: "bg-indigo-500",
-      isCurrent: "bg-primary",
+      isComplete: "bg-primary",
+      isCurrent: "bg-primary-foreground text-primary border border-primary",
     },
   },
 });
@@ -37,8 +37,8 @@ const dotStyle = tv({
   base: "bg-primary",
   variants: {
     status: {
-      isComplete: "bg-indigo-400",
-      isCurrent: "bg-primary",
+      isComplete: "bg-primary",
+      isCurrent: "bg-black dark:bg-white",
     },
     orientation: {
       [Orientation.vertical]: "h-[20px] w-[1px]",
@@ -87,17 +87,23 @@ export default function Stepper({
 }: StepperType) {
   const steps = Array.from({ length: totalSteps }, (_, index) => index + 1);
 
+  const handleOnBackward = () => {
+    if (current > 1) {
+      onBackward();
+    }
+  };
+  const handleOnForward = () => {
+    if (current < totalSteps) {
+      onForward();
+    }
+  };
   return (
     <div className={mainStyle({ orientation })}>
       <Button
         variant={"ghost"}
         size={"icon"}
         className={buttonStyle({ visible: current > 1 ? "yes" : "no" })}
-        onClick={() => {
-          if (current > 1) {
-            onBackward();
-          }
-        }}
+        onClick={handleOnBackward}
       >
         {orientation === Orientation.horizontal ? (
           <ChevronLeft className={iconsStyle} />
@@ -132,7 +138,7 @@ export default function Stepper({
         className={buttonStyle({
           visible: current < totalSteps ? "yes" : "no",
         })}
-        onClick={onForward}
+        onClick={handleOnForward}
       >
         {orientation === Orientation.horizontal ? (
           <ChevronRight className={iconsStyle} />

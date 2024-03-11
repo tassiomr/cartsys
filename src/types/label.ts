@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { ComponentsType } from "./components";
+import cuid from "cuid";
 
 export const LabelSchema = z.object({
-  id: z.string().cuid(),
+  id: z.string().cuid().optional(),
   type: z
     .nativeEnum(ComponentsType)
     .default(ComponentsType.label)

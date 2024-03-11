@@ -16,7 +16,9 @@ type SelectComponentProps = {
   value: string;
 };
 
-const parseString = (value: string | { value: string; label: string }[]) => {
+const parseString = (
+  value: string | { value: string; label: string }[]
+): { value: string; label: string }[] => {
   if (Array.isArray(value)) {
     return value;
   }
@@ -31,16 +33,16 @@ const parseString = (value: string | { value: string; label: string }[]) => {
   return [];
 };
 
-export function SelectComponent({
-  options,
-  placeholder,
-  onChange,
-  value,
-}: SelectComponentProps) {
+export const SelectComponent = React.forwardRef<
+  HTMLSelectElement,
+  SelectComponentProps
+>((props, ref) => {
+  const { options, placeholder, onChange, value } = props;
+
   return (
     <Select onValueChange={onChange}>
       <SelectTrigger className="min-w-[180px] w-full">
-        <SelectValue defaultValue={value} placeholder={placeholder} />
+        <SelectValue ref={ref} defaultValue={value} placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
@@ -59,4 +61,4 @@ export function SelectComponent({
       </SelectContent>
     </Select>
   );
-}
+});

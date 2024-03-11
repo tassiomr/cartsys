@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { ButtonVariant } from "./button";
+import { ButtonSchema } from "./button";
+import { InputSchema } from "./input";
 
 export enum ComponentsType {
   input = "input",

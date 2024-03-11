@@ -30,7 +30,7 @@ export default function Title({ orientation, setOrientation }: TitleProps) {
           {orientationButtons.map((value, index) => {
             return (
               <Button
-                key={index}
+                key={value}
                 className="min-w-[100px] lg:min-w-[120px]"
                 onClick={() => setOrientation(value)}
               >

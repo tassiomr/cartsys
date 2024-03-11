@@ -9,8 +9,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { tv } from "tailwind-variants";
 import NotFoundPage from "../not-found";
-import ComponentBuilder from "./ComponentBuilder";
-import DrawerComponent from "@/components/shared/drawer";
+import ComponentBuilder from "@/components/shared/component-builder";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const styles = tv({
   base: "w-full h-content flex items-center pt-[6rem]",
@@ -26,14 +33,14 @@ const styles = tv({
 export default function Viewer({ params }: { params: { id: string } }) {
   const [currentStep, setStep] = useState(1);
   const [currentPage, setPage] = useState<Page | null>();
-  const [isOpen, setIsOpen] = useState(false);
+  const { toast, dismiss } = useToast();
+  const query = useSearchParams();
 
-  const orientation = useSearchParams().get("orientation") as Orientation;
-  const pages = JSON.parse(useSearchParams().get("pages") || "{}") as Page[];
-  const isPreviewViewer = Boolean(useSearchParams().get("isPreviewViewer"));
+  const orientation = query.get("orientation") as Orientation;
+  const pages = JSON.parse(query.get("pages") || "{}") as Page[];
+  const isPreviewViewer = Boolean(query.get("isPreviewViewer"));
 
   const navigation = useRouter();
-  const store = useViewerStore();
 
   const appWizard = useAppStore((state) =>
     state.wizards.find((wizard) => wizard.id === params.id)
@@ -46,7 +53,8 @@ export default function Viewer({ params }: { params: { id: string } }) {
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const mountPage = useCallback(() => {
     if (wizard) {
-      setPage(wizard.pages[currentStep - 1]);
+      setPage(null);
+      setPage({ ...wizard.pages[currentStep - 1] });
     }
   }, [currentStep]);
 
@@ -63,13 +71,20 @@ export default function Viewer({ params }: { params: { id: string } }) {
   };
 
   const handleShowResults = () => {
-    setIsOpen((state) => !state);
-  };
-
-  const handleFinishStap = () => {
-    setIsOpen((state) => !state);
-
-    navigation.replace("/");
+    toast({
+      title: "Resultados coletados",
+      description: "Seus dados foram coletados e estão acessiveis no ViewStore",
+      action: (
+        <Button
+          onClick={() => {
+            navigation.replace("/");
+            dismiss();
+          }}
+        >
+          Go Home
+        </Button>
+      ),
+    });
   };
 
   if (!wizard) {
@@ -78,11 +93,6 @@ export default function Viewer({ params }: { params: { id: string } }) {
 
   return (
     <div className={styles({ orientation: wizard?.orientation })}>
-      <DrawerComponent
-        pages={wizard.pages}
-        open={isOpen}
-        dispose={handleFinishStap}
-      />
       {isPreviewViewer && (
         <Button
           className="fixed top-[5rem] left-6"
@@ -99,20 +109,25 @@ export default function Viewer({ params }: { params: { id: string } }) {
         onForward={handleForward}
       />
       <div className="lg:w-1/2 md:w-1/2 sm:w-full max-[650px]:w-full max-[650px]:p-8 sm:p-8">
-        <h1 className="lg:text-3xl md:text-2xl sm:text-xl font-bold mb-8 mt-6">
-          {currentPage?.title}
-        </h1>
+        <Card className="rounded-sm">
+          <CardHeader>
+            <CardTitle>{currentPage?.title}</CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardDescription className="px-8 py-8 flex flex-col gap-8">
+            {currentPage?.components.map((component) => {
+              return (
+                <ComponentBuilder key={component.id} component={component} />
+              );
+            })}
+          </CardDescription>
+        </Card>
 
-        <div className="w-full flex flex-col gap-4 mt-8">
-          {currentPage?.components.map((component) => {
-            return (
-              <ComponentBuilder key={component.id} component={component} />
-            );
-          })}
-        </div>
         <footer className="flex justify-center items-center py-4 sm:py-8 md:py-0 md:px-4 w-full gap-4 mt-10">
           {currentStep === wizard.pages.length && (
-            <Button onClick={handleShowResults}>Finish</Button>
+            <Button size={"md"} onClick={handleShowResults}>
+              Finish
+            </Button>
           )}
         </footer>
       </div>

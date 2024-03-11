@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { ComponentsType } from "./components";
+import cuid from "cuid";
 
 export enum InputTypes {
   text = "text",
@@ -10,7 +11,7 @@ export enum InputTypes {
 }
 
 export const InputSchema = z.object({
-  id: z.string().cuid(),
+  id: z.string().cuid().optional(),
   type: z
     .nativeEnum(ComponentsType)
     .default(ComponentsType.input)

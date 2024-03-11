@@ -12,11 +12,8 @@ export const useViewerStore = create<ViewerStore>(() => ({
   getValue(key: string) {
     return useViewerStore.getState()[key];
   },
-  alert: () => {
-    alert("use view store");
-  },
-  sheet: () => {
-    alert("use view store sheet");
+  alert: (value: string) => {
+    alert(`Clicked at: ${value}`);
   },
   getForm() {
     const state = useViewerStore.getState();

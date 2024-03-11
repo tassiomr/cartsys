@@ -3,22 +3,22 @@ import { z } from "zod";
 import { ComponentSchema } from "./components";
 
 enum Orientation {
-  horizontal = "horizontal",
-  vertical = "vertical",
-  none = "none",
+	horizontal = "horizontal",
+	vertical = "vertical",
+	none = "none",
 }
 
 const PageSchema = z.object({
-  id: z.string().cuid().default(cuid()),
-  title: z.string(),
-  components: z.array(ComponentSchema).default([]),
+	id: z.string().cuid().default(cuid()),
+	title: z.string(),
+	components: z.array(ComponentSchema).default([]),
 });
 
 const WizardSchema = z.object({
-  id: z.string().cuid().optional().default(cuid()),
-  pages: z.array(PageSchema),
-  orientation: z.nativeEnum(Orientation),
-  createdAt: z.date().default(new Date()),
+	id: z.string().cuid().optional().default(cuid()),
+	pages: z.array(PageSchema),
+	orientation: z.nativeEnum(Orientation),
+	createdAt: z.date().default(new Date()),
 });
 
 type Wizard = z.infer<typeof WizardSchema>;

@@ -1,4 +1,4 @@
 export interface Page {
-  id: string;
-  titulo: string;
+	id: string;
+	titulo: string;
 }

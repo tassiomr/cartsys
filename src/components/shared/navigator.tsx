@@ -6,21 +6,21 @@ import { Button } from "../ui/button";
 import { ModeToggle } from "./theme-toogle";
 
 export default function NavigationMenu() {
-  const pathname = usePathname();
+	const pathname = usePathname();
 
-  return (
-    <nav className="fixed z-1 bg-primary-foreground flex justify-between px-12 items-center w-screen h-16">
-      <Link href={"/"}>
-        <p>CartSys Challanger</p>
-      </Link>
-      <div className="flex gap-2">
-        {pathname !== "/wizard-creator" && (
-          <Link href="/wizard-creator">
-            <Button>Wizard Creator</Button>
-          </Link>
-        )}
-        <ModeToggle />
-      </div>
-    </nav>
-  );
+	return (
+		<nav className="fixed z-1 bg-primary-foreground flex justify-between px-12 items-center w-screen h-16">
+			<Link href={"/"}>
+				<p>CartSys Challanger</p>
+			</Link>
+			<div className="flex gap-2">
+				{pathname !== "/wizard-creator" && (
+					<Link href="/wizard-creator">
+						<Button>Wizard Creator</Button>
+					</Link>
+				)}
+				<ModeToggle />
+			</div>
+		</nav>
+	);
 }
