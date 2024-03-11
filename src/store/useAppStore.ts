@@ -7,7 +7,6 @@ type ViewerStore = {
 	wizard: Wizard | null;
 	wizards: Wizard[];
 	createWizard: (wizard: Wizard) => void;
-	// biome-ignore lint/suspicious/noExplicitAny: is necessary to create a dynamic store
 	addValue: (key: keyof typeof initialState, value: any) => void;
 };
 
@@ -23,8 +22,6 @@ export const useAppStore = create(
 	persist<ViewerStore>(
 		(set) => ({
 			...initialState,
-
-			// biome-ignore lint/suspicious/noExplicitAny: is necessary to create a dynamic store
 			addValue: (key: keyof typeof initialState, value: any) => {
 				set((state) => {
 					if (key === "addValue") {

@@ -6,9 +6,9 @@ import { Input } from "./input";
 import { Label } from "./label";
 
 export const components = {
-  [ComponentsType.button]: Button,
-  [ComponentsType.input]: Input,
-  [ComponentsType.label]: Label,
-  [ComponentsType.select]: SelectComponent,
-  [ComponentsType.themeToggle]: ModeToggle,
+	[ComponentsType.button]: Button,
+	[ComponentsType.input]: Input,
+	[ComponentsType.label]: Label,
+	[ComponentsType.select]: SelectComponent,
+	[ComponentsType.themeToggle]: ModeToggle,
 };

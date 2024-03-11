@@ -7,6 +7,12 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off"
+			},
 			"style": {
 				"useBlockStatements": "error",
 				"useShorthandArrayType": "error",

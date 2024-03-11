@@ -1,3 +1,4 @@
+import cuid from "cuid";
 import { tv } from "tailwind-variants";
 
 type ButtonProps = {
@@ -40,7 +41,7 @@ export default function ButtonGroup({ buttons }: ButtonProps) {
 			{buttons.map((button, index) => {
 				return (
 					<button
-						key={index}
+						key={cuid()}
 						className={buttonStyles({ border: getStatusButton(index) })}
 						type={button.type || "button"}
 						onClick={button?.click}
