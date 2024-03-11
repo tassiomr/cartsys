@@ -6,6 +6,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import constants from "@/config/constants";
 import { Orientation } from "@/types/wizard";
 
 type TitleProps = {
@@ -20,9 +21,10 @@ export default function Title({ orientation, setOrientation }: TitleProps) {
 		return (
 			<Card>
 				<CardHeader>
-					<CardTitle>Vamos começar</CardTitle>
+					<CardTitle>{constants.wizardCreator.emptyOrientationTitle}</CardTitle>
 					<CardDescription>
-						Primeiramente escolha a direção do layout do seu Wizard!
+					{constants.wizardCreator.emptyOrientationDescription}
+					
 					</CardDescription>
 				</CardHeader>
 
