@@ -38,9 +38,8 @@ Ao utilizar o Zod e o React Hook Form em conjunto, você não só assegura a int
 
 Na escolha da arquitetura, decidi seguir o padrão do Next.js. Acreditei que essa escolha seria a mais adequada para resolver o problema proposto. O Next.js fornece uma estrutura sólida e bem definida para construir aplicativos React. Isso facilita a organização do código e permite o desenvolvimento de funcionalidades avançadas, como roteamento dinâmico e renderização do lado do servidor.
 
-Para quem deseja explorar diferentes abordagens arquiteturais, disponibilizei abaixo um links de uma aplicações que desenvolvi. Que utiliza Create React App, essa aplicação serve como exemplo prático de uma arquitetura que pode oferecer opções valiosas para projetos futuros.
+Para quem deseja explorar diferentes abordagens arquiteturais, disponibilizei abaixo um link de uma aplicação que desenvolvi. Que utiliza Create React App, essa aplicação serve como exemplo prático de uma arquitetura que pode oferecer opções valiosas para projetos futuros.
 
-Por favor, adicione os links para as aplicações nos espaços abaixo:
 
 [Link para Aplicação com Create React App](https://github.com/tassiomr/search-animals)
 
