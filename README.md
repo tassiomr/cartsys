@@ -43,11 +43,11 @@ Para quem deseja explorar diferentes abordagens arquiteturais, disponibilizei ab
 
 [Link para Aplicação com Create React App](https://github.com/tassiomr/search-animals)
 
-## Interface Responsiva com ShadowUI e Tailwind CSS
+## Interface Responsiva com ShadCnUI e Tailwind CSS
 
 Neste projeto, utilizei ShadowUI e Tailwind CSS para desenvolver uma interface de usuário (UI) eficiente e responsiva:
 
-### ShadowUI
+### ShadCnUI
 
 - Simplifica a criação e manutenção de componentes.
 - Promove a reutilização e reduz o acoplamento entre eles.
